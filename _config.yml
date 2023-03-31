@@ -13,7 +13,7 @@
 title: My Website
 
 # Your name to show in the footer
-author: Some Person
+author: Aditya K
 
 ###############################################
 # --- List of links in the navigation bar --- #
@@ -49,24 +49,24 @@ round-avatar: true
 # Select the social network links that you want to show in the footer.
 # Uncomment the links you want to show and add your information to each one.
 social-network-links:
-  email: "someone@example.com"
-  rss: true  # remove this line if you don't want to show an RSS link at the bottom
-  facebook: deanattali
-  github: daattali
-  twitter: daattali
-  patreon: DeanAttali
-  youtube: c/daattali
+  email: "adityahk2017@gmail.com"
+# rss: true  # remove this line if you don't want to show an RSS link at the bottom
+# facebook: deanattali
+  github: adityakad
+  twitter: AdityaKadlimat1
+# patreon: DeanAttali
+  youtube: AdityaKadlimatti
 #  medium: yourname
 #  reddit: yourname
 #  linkedin: daattali
 #  xing: yourname
 #  stackoverflow: "3943160/daattali"
 #  snapchat: deanat78
-#  instagram: deanat78
+  instagram: aditya_kbye
 #  spotify: yourname
 #  telephone: +14159998888
 #  steam: deanat78
-#  twitch: yourname
+  twitch: AdiTyaHk
 #  yelp: yourname
 #  telegram: yourname
 #  calendly: yourname
@@ -94,7 +94,7 @@ share-links-active:
 
 # How to display the link to your website in the footer
 # Remove this if you don't want a link in the footer
-url-pretty: "MyWebsite.com"
+url-pretty: "adityakad.github.io"
 
 # Excerpt word length - Truncate the excerpt of each post on the feed page to the specified number of words
 excerpt_length: 50
@@ -109,7 +109,7 @@ feed_show_tags: true
 post_search: true
 
 # Add a button in the footer to edit the current page. Only works if your website is hosted on GitHub
-edit_page_button: true
+# edit_page_button: true
 
 # Allow sub-menu items (second-level navigation menu items) to be longer than the top-level menu
 # If this setting is off, then long sub-menu words might get cut off
