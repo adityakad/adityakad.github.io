@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Sample blog post
-subtitle: Each post also has a subtitle
-gh-repo: daattali/beautiful-jekyll
+title: Welcome to my freshly baked website!!
+subtitle: Make yourself comfortable
+gh-repo: adityakad/adityakad.github.io
 gh-badge: [star, fork, follow]
 tags: [test]
 comments: true
