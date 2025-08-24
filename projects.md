@@ -3,11 +3,9 @@ layout: page
 title: Projects
 subtitle: A showcase of my work and creations
 css: 
-  - "/assets/css/apple-theme.css"
   - "/assets/css/github-projects.css"
   - "/assets/css/projects.css"
 js: 
-  - "/assets/js/theme-switcher.js"
   - "/assets/js/github-projects.js"
   - "/assets/js/projects.js"
 ---
