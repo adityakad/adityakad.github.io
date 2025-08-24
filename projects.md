@@ -11,7 +11,7 @@ js: "/assets/js/projects.js"
     
     <div class="project-card" data-category="web">
       <div class="project-image">
-        <img src="/assets/img/project-placeholder.jpg" alt="Portfolio Website" />
+        <img src="/assets/img/project-placeholder.svg" alt="Portfolio Website" />
         <div class="project-overlay">
           <div class="project-links">
             <a href="https://github.com/adityakad/adityakad.github.io" target="_blank" class="btn-project">
@@ -37,7 +37,7 @@ js: "/assets/js/projects.js"
 
     <div class="project-card" data-category="programming">
       <div class="project-image">
-        <img src="/assets/img/project-placeholder.jpg" alt="Coming Soon" />
+        <img src="/assets/img/project-placeholder.svg" alt="Coming Soon" />
         <div class="project-overlay">
           <div class="project-links">
             <a href="#" class="btn-project">
