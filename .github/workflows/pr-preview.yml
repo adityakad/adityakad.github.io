@@ -1,0 +1,65 @@
+name: PR Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+  deployments: write
+
+concurrency:
+  group: pr-preview-${{ github.event.number }}
+  cancel-in-progress: true
+
+jobs:
+  build-preview:
+    name: Build PR Preview
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+          
+      - name: Cache Jekyll dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            vendor/bundle
+            .jekyll-cache
+          key: ${{ runner.os }}-jekyll-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-jekyll-
+            
+      - name: Install dependencies
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          
+      - name: Build with Jekyll
+        run: |
+          bundle exec jekyll build --baseurl "/pr-preview-${{ github.event.number }}"
+        env:
+          JEKYLL_ENV: development
+          
+      - name: Upload to Netlify
+        uses: nwtgck/actions-netlify@v3.0
+        with:
+          publish-dir: './_site'
+          production-branch: 'main'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy from GitHub Actions"
+          enable-pull-request-comment: true
+          enable-commit-comment: false
+          overwrites-pull-request-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 5

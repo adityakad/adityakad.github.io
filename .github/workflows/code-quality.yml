@@ -1,0 +1,92 @@
+name: Code Quality
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
+jobs:
+  lint:
+    name: Lint Code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          
+      - name: Install Node.js dependencies
+        run: |
+          npm install -g markdownlint-cli htmlhint stylelint eslint
+          
+      - name: Lint Markdown files
+        run: |
+          markdownlint . --ignore node_modules --ignore vendor || true
+          
+      - name: Lint CSS files
+        run: |
+          find . -name "*.css" -not -path "./node_modules/*" -not -path "./vendor/*" | xargs stylelint || true
+          
+      - name: Lint JavaScript files
+        run: |
+          find . -name "*.js" -not -path "./node_modules/*" -not -path "./vendor/*" | xargs eslint || true
+
+  spellcheck:
+    name: Spell Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Spell Check
+        uses: streetsidesoftware/cspell-action@v6
+        with:
+          files: |
+            **/*.md
+            **/*.html
+            **/*.txt
+          config: '.cspell.json'
+          incremental_files_only: false
+
+  accessibility:
+    name: Accessibility Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+          
+      - name: Install dependencies
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          
+      - name: Build site
+        run: bundle exec jekyll build
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Install axe-core
+        run: npm install -g @axe-core/cli
+        
+      - name: Run accessibility tests
+        run: |
+          npx axe-core _site/ --exit || true
